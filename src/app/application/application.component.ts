@@ -1,6 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { ApiService } from '../services/api.service';
-import { ApiResponse ,Timings } from '../../interfaces/prayertimes.interfaces';       
+import { ApiResponse, Timings } from '../../interfaces/prayertimes.interfaces';       
 import { NgIf } from '@angular/common';
 
 @Component({
@@ -27,5 +27,9 @@ export class ApplicationComponent {
         console.error('Fout bij het ophalen:', err);
       }
     });
+  }
+
+  ngOnInit() {
+    this.getApiInformation();
   }
 }
