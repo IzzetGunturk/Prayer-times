@@ -1,1 +1,7 @@
-<p>application works!</p>
+<div *ngIf="prayerTimes">
+  <p>Fajr: {{ prayerTimes.Fajr }}</p>
+  <p>Dhuhr: {{ prayerTimes.Dhuhr }}</p>
+  <p>Asr: {{ prayerTimes.Asr }}</p>
+  <p>Maghrib: {{ prayerTimes.Maghrib }}</p>
+  <p>Isha: {{ prayerTimes.Isha }}</p>
+</div>
