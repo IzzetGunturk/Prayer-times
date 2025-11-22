@@ -9,7 +9,7 @@ import { Component } from '@angular/core';
 })
 export class TimeAndDateComponent {
   dateNow = new Date();
-  timeNow: string = '';
+  timeNow = '';
   
   dateToday = new Intl.DateTimeFormat('nl-NL', {
     day: 'numeric',
