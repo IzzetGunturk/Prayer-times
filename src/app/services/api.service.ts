@@ -8,12 +8,12 @@ import { ApiResponse } from '../../interfaces/prayertimes.interfaces';
 })
 export class ApiService {
 
-  private baseUrl = 'https://api.aladhan.com/v1/timingsByCity';
+  private baseUrl = 'https://api.aladhan.com/v1/timingsByCity/';
 
   private httpClient = inject(HttpClient)
 
-  getPrayerTimes(city: string, country: string): Observable<ApiResponse> {
-    const url = `${this.baseUrl}?city=${city}&country=${country}&method=3`;
+  getPrayerTimes(today: string, city: string, country: string): Observable<ApiResponse> {
+    const url = `${this.baseUrl}${today}?city=${city}&country=${country}&method=3`;
     return this.httpClient.get<ApiResponse>(url);
   }
 }

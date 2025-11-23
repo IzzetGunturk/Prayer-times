@@ -20,7 +20,31 @@ export class ApplicationComponent {
   private apiService = inject(ApiService);
 
   getApiInformation() {
-    this.apiService.getPrayerTimes('Roermond', 'Netherlands').subscribe({
+    const today = new Date();
+    const day = today.getDate().toString().padStart(2,'0');
+    const month = (today.getMonth() + 1).toString().padStart(2,'0');
+    const year = today.getFullYear();
+    const formattedDate = `${day}-${month}-${year}`;
+
+    this.apiService.getPrayerTimes(formattedDate, 'Roermond', 'Netherlands').subscribe({
+      next: (response: ApiResponse) => {
+        this.prayerTimes = response.data.timings;
+        this.timeLeftPrayer();
+      },
+      error: (err) => {
+        console.error('Fout bij het ophalen:', err);
+      }
+    });
+  }
+
+  private updateTomorrowPrayerTime() {
+    const today = new Date();
+    const day = (today.getDate() + 1).toString().padStart(2,'0');
+    const month = (today.getMonth() + 1).toString().padStart(2,'0');
+    const year = today.getFullYear();
+    const formattedDate = `${day}-${month}-${year}`;
+
+    this.apiService.getPrayerTimes(formattedDate, 'Roermond', 'Netherlands').subscribe({
       next: (response: ApiResponse) => {
         this.prayerTimes = response.data.timings;
         this.timeLeftPrayer();
@@ -48,6 +72,7 @@ export class ApplicationComponent {
     const [fh, fm] = this.prayerTimes.Fajr.split(':').map(Number);
     const fajrTomorrow = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1, fh, fm);
 
+    this.updateTomorrowPrayerTime();
 
     return { name: 'Fajr', date: fajrTomorrow };
   }
