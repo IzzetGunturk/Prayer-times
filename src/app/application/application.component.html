@@ -1,10 +1,10 @@
 <app-time-and-date></app-time-and-date>
 
 <div *ngIf="prayerTimes">
-  {{timeLeft}}
+  <h4>{{timeLeft}}</h4>
   <p>Fajr: {{ prayerTimes.Fajr }}</p>
-  <p>Dhuhr: {{ prayerTimes.Dhuhr }}</p>
   <p>Sunrise: {{ prayerTimes.Sunrise }}</p>
+  <p>Dhuhr: {{ prayerTimes.Dhuhr }}</p>
   <p>Asr: {{ prayerTimes.Asr }}</p>
   <p>Maghrib: {{ prayerTimes.Maghrib }}</p>
   <p>Isha: {{ prayerTimes.Isha }}</p>
