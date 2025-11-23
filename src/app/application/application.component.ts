@@ -34,31 +34,31 @@ export class ApplicationComponent {
   getNextPrayer(): { name: string; date: Date } | null {
     if (!this.prayerTimes) return null;
 
-    const dateNow = new Date();
+    const now = new Date();
 
     for (const prayer of this.prayerOrder) {
       const [h, m] = this.prayerTimes[prayer as keyof Timings].split(':').map(Number);
-      const prayerDate = new Date(dateNow.getFullYear(), dateNow.getMonth(), dateNow.getDate(), h, m);
+      const prayerTime = new Date(now.getFullYear(), now.getMonth(), now.getDate(), h, m);
 
-      if (prayerDate > dateNow) {
-        return { name: prayer, date: prayerDate };
+      if (prayerTime > now) {
+        return { name: prayer, date: prayerTime };
       }
     }
 
     const [fh, fm] = this.prayerTimes.Fajr.split(':').map(Number);
-    const fajrTomorrow = new Date(dateNow.getFullYear(), dateNow.getMonth(), dateNow.getDate() + 1, fh, fm);
+    const fajrTomorrow = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1, fh, fm);
 
 
     return { name: 'Fajr', date: fajrTomorrow };
   }
 
   timeLeftPrayer() {
-    const dateNow = new Date();
+    const now = new Date();
     const nextPrayer = this.getNextPrayer();
 
     if (!nextPrayer) return;
 
-    const differenceTime = nextPrayer.date.getTime() - dateNow.getTime();
+    const differenceTime = nextPrayer.date.getTime() - now.getTime();
 
     const hours = Math.floor(differenceTime / (1000 * 60 * 60));
     const minutes = Math.floor((differenceTime % (1000 * 60 * 60)) / (1000 * 60));
