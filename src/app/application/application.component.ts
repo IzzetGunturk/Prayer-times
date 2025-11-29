@@ -1,7 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { ApiService } from '../services/api.service';
 import { ApiResponse, Timings } from '../../interfaces/prayertimes.interfaces';       
-import { NgIf, NgClass, NgStyle } from '@angular/common';
+import { NgIf } from '@angular/common';
 import { TimeAndDateComponent } from '../time-and-date/time-and-date.component';
 
 @Component({
