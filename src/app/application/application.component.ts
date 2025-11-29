@@ -16,6 +16,7 @@ export class ApplicationComponent {
   prayerTimes?: Timings;
   prayerOrder = ['Fajr','Sunrise','Dhuhr','Asr','Maghrib','Isha'];
   timeLeft?: string;
+  nextPrayerName?: string;
 
   private apiService = inject(ApiService);
 
@@ -82,6 +83,8 @@ export class ApplicationComponent {
     const nextPrayer = this.getNextPrayer();
 
     if (!nextPrayer) return;
+
+    this.nextPrayerName = nextPrayer.name;
 
     const differenceTime = nextPrayer.date.getTime() - now.getTime();
 

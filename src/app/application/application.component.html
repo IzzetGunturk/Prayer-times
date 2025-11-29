@@ -2,10 +2,10 @@
 
 <div *ngIf="prayerTimes">
   <h4>{{timeLeft}}</h4>
-  <p>Fajr: {{ prayerTimes.Fajr }}</p>
-  <p>Sunrise: {{ prayerTimes.Sunrise }}</p>
-  <p>Dhuhr: {{ prayerTimes.Dhuhr }}</p>
-  <p>Asr: {{ prayerTimes.Asr }}</p>
-  <p>Maghrib: {{ prayerTimes.Maghrib }}</p>
-  <p>Isha: {{ prayerTimes.Isha }}</p>
+  <p [class.bold]="nextPrayerName === 'Fajr'">Fajr: {{ prayerTimes.Fajr }}</p>
+  <p [class.bold]="nextPrayerName === 'Sunrise'">Sunrise: {{ prayerTimes.Sunrise }}</p>
+  <p [class.bold]="nextPrayerName === 'Dhuhr'">Dhuhr: {{ prayerTimes.Dhuhr }}</p>
+  <p [class.bold]="nextPrayerName === 'Asr'">Asr: {{ prayerTimes.Asr }}</p>
+  <p [class.bold]="nextPrayerName === 'Maghrib'">Maghrib: {{ prayerTimes.Maghrib }}</p>
+  <p [class.bold]="nextPrayerName === 'Isha'">Isha: {{ prayerTimes.Isha }}</p>
 </div>
