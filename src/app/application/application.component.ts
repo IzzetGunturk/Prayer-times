@@ -56,22 +56,22 @@ export class ApplicationComponent {
     });
   }
 
-  getNextPrayer(): { name: string; date: Date } | null {
+  getNextPrayer(now?: Date): { name: string; date: Date } | null {
     if (!this.prayerTimes) return null;
 
-    const now = new Date();
+    const currentDate = now ?? new Date();
 
     for (const prayer of this.prayerOrder) {
       const [h, m] = this.prayerTimes[prayer as keyof Timings].split(':').map(Number);
-      const prayerTime = new Date(now.getFullYear(), now.getMonth(), now.getDate(), h, m);
+      const prayerTime = new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate(), h, m);
 
-      if (prayerTime > now) {
+      if (prayerTime > currentDate) {
         return { name: prayer, date: prayerTime };
       }
     }
 
     const [fh, fm] = this.prayerTimes.Fajr.split(':').map(Number);
-    const fajrTomorrow = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1, fh, fm);
+    const fajrTomorrow = new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate() + 1, fh, fm);
 
     this.updateTomorrowPrayerTime();
 

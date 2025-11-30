@@ -29,3 +29,6 @@ jobs:
 
     - name: Build Angular app
       run: npm run build -- --configuration production
+
+    - name: Run Karma tests
+      run: npm run test -- --watch=false --browsers=ChromeHeadless
