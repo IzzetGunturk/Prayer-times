@@ -1,4 +1,23 @@
-# PrayerTimes
+# 🕌 Prayer Times 
+
+I programmed this application to display prayer times for each city.
+
+## 🛠️ Technologies
+
+- Angular
+- SCSS
+- TypeScript
+
+Unit test:
+- Karma/Jasmine
+
+CI/CD:
+- This project uses GitHub Actions for continuous integration and continuous deployment (CI/CD)
+
+Containerization:
+- Docker
+
+------------
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.3.7.
 
