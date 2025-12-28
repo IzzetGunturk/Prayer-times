@@ -17,6 +17,7 @@ export class ApplicationComponent {
   prayerOrder = ['Fajr','Sunrise','Dhuhr','Asr','Maghrib','Isha'];
   timeLeft?: string;
   nextPrayerName?: string;
+  city = "Roermond";
 
   private apiService = inject(ApiService);
 
@@ -27,7 +28,7 @@ export class ApplicationComponent {
     const year = today.getFullYear();
     const formattedDate = `${day}-${month}-${year}`;
 
-    this.apiService.getPrayerTimes(formattedDate, 'Roermond', 'Netherlands').subscribe({
+    this.apiService.getPrayerTimes(formattedDate, this.city, 'Netherlands').subscribe({
       next: (response: ApiResponse) => {
         this.prayerTimes = response.data.timings;
         this.timeLeftPrayer();
@@ -96,7 +97,7 @@ export class ApplicationComponent {
       timeDigits => timeDigits.toString().padStart(2, '0')
     );
 
-    this.timeLeft = `Prayer: ${nextPrayer.name} - ${hStr}:${mStr}:${sStr}`;
+    this.timeLeft = `${hStr}:${mStr}:${sStr}`;
   }
 
   ngOnInit() {

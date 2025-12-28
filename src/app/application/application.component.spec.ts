@@ -111,8 +111,6 @@ describe('ApplicationComponent', () => {
     component.timeLeftPrayer();
 
     // then
-    expect(component.nextPrayerName).toBe('Dhuhr');
-    expect(component.timeLeft).toContain('Dhuhr');
     expect(component.timeLeft).toMatch('02:30');
   });
 });

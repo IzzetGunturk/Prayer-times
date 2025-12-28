@@ -1,11 +1,50 @@
-<app-time-and-date></app-time-and-date>
+<div class="container">
 
-<div *ngIf="prayerTimes">
-  <h4>{{timeLeft}}</h4>
-  <p [class.bold]="nextPrayerName === 'Fajr'">Fajr: {{ prayerTimes.Fajr }}</p>
-  <p [class.bold]="nextPrayerName === 'Sunrise'">Sunrise: {{ prayerTimes.Sunrise }}</p>
-  <p [class.bold]="nextPrayerName === 'Dhuhr'">Dhuhr: {{ prayerTimes.Dhuhr }}</p>
-  <p [class.bold]="nextPrayerName === 'Asr'">Asr: {{ prayerTimes.Asr }}</p>
-  <p [class.bold]="nextPrayerName === 'Maghrib'">Maghrib: {{ prayerTimes.Maghrib }}</p>
-  <p [class.bold]="nextPrayerName === 'Isha'">Isha: {{ prayerTimes.Isha }}</p>
+  <div class="header">
+    <app-time-and-date></app-time-and-date>
+
+    <div class="city">
+      {{ city }}
+    </div>
+  </div>
+
+  <div class="prayer-container" *ngIf="prayerTimes">
+
+    <div class="countdown">
+      {{nextPrayerName}} over: <span>{{ timeLeft }}</span>
+    </div>
+
+    <div class="prayer-grid">
+      <div class="prayer-cell" [class.active]="nextPrayerName === 'Fajr'">
+        <span class="name">Fajr / Sabah</span>
+        <span class="time">{{ prayerTimes.Fajr }}</span>
+      </div>
+
+      <div class="prayer-cell" [class.active]="nextPrayerName === 'Sunrise'">
+        <span class="name">Sunrise / Güneş</span>
+        <span class="time">{{ prayerTimes.Sunrise }}</span>
+      </div>
+
+      <div class="prayer-cell" [class.active]="nextPrayerName === 'Dhuhr'">
+        <span class="name">Dhuhr / Öğle</span>
+        <span class="time">{{ prayerTimes.Dhuhr }}</span>
+      </div>
+
+      <div class="prayer-cell" [class.active]="nextPrayerName === 'Asr'">
+        <span class="name">Asr / Ikindi</span>
+        <span class="time">{{ prayerTimes.Asr }}</span>
+      </div>
+
+      <div class="prayer-cell" [class.active]="nextPrayerName === 'Maghrib'">
+        <span class="name">Maghrib / Aksam</span>
+        <span class="time">{{ prayerTimes.Maghrib }}</span>
+      </div>
+
+      <div class="prayer-cell" [class.active]="nextPrayerName === 'Isha'">
+        <span class="name">Isha / Yatsi</span>
+        <span class="time">{{ prayerTimes.Isha }}</span>
+      </div>
+    </div>
+
+  </div>
 </div>
