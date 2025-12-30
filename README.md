@@ -16,6 +16,9 @@ CI/CD:
 
 Containerization:
 - Docker
+  
+## 📷 Images
+<img src="src/assets/mockup/PrayerTimesImg.png" width="800"/>
 
 ------------
 
