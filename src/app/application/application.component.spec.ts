@@ -2,6 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { of } from 'rxjs';
 import { ApplicationComponent } from './application.component';
 import { ApiService } from '../services/api.service';
+import { ActivatedRoute } from '@angular/router';
 
 describe('ApplicationComponent', () => {
   let component: ApplicationComponent;
@@ -23,9 +24,18 @@ describe('ApplicationComponent', () => {
       }
     }));
 
+    const activatedRouteMock = {
+      params: of({
+        city: 'Amsterdam'
+      })
+    }
+
     await TestBed.configureTestingModule({
       imports: [ApplicationComponent],
-      providers: [{ provide: ApiService, useValue: apiSpy }]
+      providers: [
+        { provide: ApiService, useValue: apiSpy },
+        { provide: ActivatedRoute, useValue: activatedRouteMock }
+      ]
     }).compileComponents();
 
     fixture = TestBed.createComponent(ApplicationComponent);

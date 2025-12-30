@@ -1,4 +1,5 @@
 import { Component, inject } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { ApiService } from '../services/api.service';
 import { ApiResponse, Timings } from '../../interfaces/prayertimes.interfaces';       
 import { NgIf } from '@angular/common';
@@ -17,9 +18,10 @@ export class ApplicationComponent {
   prayerOrder = ['Fajr','Sunrise','Dhuhr','Asr','Maghrib','Isha'];
   timeLeft?: string;
   nextPrayerName?: string;
-  city = "Roermond";
+  city = '';
 
   private apiService = inject(ApiService);
+  private activatedRoute = inject(ActivatedRoute);
 
   getApiInformation() {
     const today = new Date();
@@ -29,24 +31,6 @@ export class ApplicationComponent {
     const formattedDate = `${day}-${month}-${year}`;
 
     this.apiService.getPrayerTimes(formattedDate, this.city, 'Netherlands').subscribe({
-      next: (response: ApiResponse) => {
-        this.prayerTimes = response.data.timings;
-        this.timeLeftPrayer();
-      },
-      error: (err) => {
-        console.error('Fout bij het ophalen:', err);
-      }
-    });
-  }
-
-  private updateTomorrowPrayerTime() {
-    const today = new Date();
-    const day = (today.getDate() + 1).toString().padStart(2,'0');
-    const month = (today.getMonth() + 1).toString().padStart(2,'0');
-    const year = today.getFullYear();
-    const formattedDate = `${day}-${month}-${year}`;
-
-    this.apiService.getPrayerTimes(formattedDate, 'Roermond', 'Netherlands').subscribe({
       next: (response: ApiResponse) => {
         this.prayerTimes = response.data.timings;
         this.timeLeftPrayer();
@@ -74,8 +58,6 @@ export class ApplicationComponent {
     const [fh, fm] = this.prayerTimes.Fajr.split(':').map(Number);
     const fajrTomorrow = new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate() + 1, fh, fm);
 
-    this.updateTomorrowPrayerTime();
-
     return { name: 'Fajr', date: fajrTomorrow };
   }
 
@@ -101,7 +83,10 @@ export class ApplicationComponent {
   }
 
   ngOnInit() {
-    this.getApiInformation();
+    this.activatedRoute.params.subscribe(params => {
+      this.city = params['city'] || 'Amsterdam';
+      this.getApiInformation();
+    })
 
     setInterval(() => {
       this.timeLeftPrayer();
